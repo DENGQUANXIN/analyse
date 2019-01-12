@@ -114,135 +114,285 @@ export var gender = {
 /**
  * 行业分布 图表配置
  */
+var xData = function() {
+  var data = [];
+  for (var i = 1; i < 300; i++) {
+      data.push("行业" + i);
+  }
+  return data;
+}();
+
 export var industry = {
-  tooltip: {
-    trigger: 'axis'
+  "title": {
+    "text": "·评论者行业分布",
+    x: "4%",
+
+    textStyle: {
+      color: '#fff',
+      fontSize: '22'
+    },
+    subtextStyle: {
+      color: '#90979c',
+      fontSize: '16',
+
+    },
   },
-  dataZoom: [{ // 这个dataZoom组件，默认控制x轴。
-    type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-    start: 10, // 左边在 10% 的位置。
-    end: 60 // 右边在 60% 的位置。
-  }, { // 这个dataZoom组件，也控制x轴。
-    type: 'inside', // 这个 dataZoom 组件是 inside 型 dataZoom 组件
-    start: 10, // 左边在 10% 的位置。
-    end: 60 // 右边在 60% 的位置。
+  "tooltip": {
+    "trigger": "axis",
+    "axisPointer": {
+      "type": "shadow",
+      textStyle: {
+        color: "#fff"
+      }
+
+    },
+  },
+  "grid": {
+    "borderWidth": 0,
+    "top": 110,
+    "bottom": 95,
+    textStyle: {
+      color: "#fff"
+    }
+  },
+  "legend": {
+    x: '4%',
+    top: '11%',
+    textStyle: {
+      color: '#90979c',
+    },
+    "data": ['评论者行业分布']
+  },
+
+
+  "calculable": true,
+  "xAxis": [{
+    "type": "category",
+    "axisLine": {
+      lineStyle: {
+        color: '#90979c'
+      }
+    },
+    "splitLine": {
+      "show": false
+    },
+    "axisTick": {
+      "show": false
+    },
+    "splitArea": {
+      "show": false
+    },
+    "axisLabel": {
+      "interval": 0,
+      'rotate': 90
+
+    },
+    "data": xData,
   }],
-  xAxis: [{
-    type: 'category',
-    data: [0, 0, 1, 2, 1, 2, 1, 2, 5, 5, 7, 4, 4, 8, 12, 345, 396, 346, 307, 253, 206, 156, 110, 80, 52, 31, 26, 16, 12, 11, 10, 8, 9, 9, 13, 13, 14, 14, 10, 11, 12, 15, 13, 13, 10, 15, 45, 110, 181, 269, 359, 479, 571, 665, 735, 797, 856, 885, 902, 909, 917, 920, 917, 917, 898, 884, 869, 851, 828, 805, 763, 726, 684, 665, 635, 614, 598, 590, 562, 544, 549, 550, 561, 577, 599, 617, 645, 667, 688, 726, 750, 777, 790, 832, 852, 878, 877, 878, 875, 870, 851, 842, 825, 812, 773, 732, 697, 648, 609, 561, 509, 465, 430, 385, 331, 288, 245, 181, 0]
+  "yAxis": [{
+    "type": "value",
+    "splitLine": {
+      "show": false
+    },
+    "axisLine": {
+      lineStyle: {
+        color: '#90979c'
+      }
+    },
+    "axisTick": {
+      "show": false
+    },
+    "axisLabel": {
+      "interval": 0,
+
+    },
+    "splitArea": {
+      "show": false
+    },
+
   }],
-  yAxis: [{
-    type: 'value',
-    name: '数量',
-    min: 0,
-    max: 1000
+  "dataZoom": [{
+    "show": true,
+    "height": 30,
+    "xAxisIndex": [
+      0
+    ],
+    bottom: 10,
+    "start": 0,
+    "end": 10,
+    handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+    handleSize: '110%',
+    handleStyle: {
+      color: "#d3dee5",
+
+    },
+    textStyle: {
+      color: "#fff"
+    },
+    borderColor: "#90979c"
+
+
+  }, {
+    "type": "inside",
+    "show": true,
+    "height": 15,
+    "start": 1,
+    "end": 35
   }],
-  series: [{
-    name: '数量',
-    type: 'bar',
-    data: [0, 0, 1, 2, 1, 2, 1, 2, 5, 5, 7, 4, 4, 8, 12, 345, 396, 346, 307, 253, 206, 156, 110, 80, 52, 31, 26, 16, 12, 11, 10, 8, 9, 9, 13, 13, 14, 14, 10, 11, 12, 15, 13, 13, 10, 15, 45, 110, 181, 269, 359, 479, 571, 665, 735, 797, 856, 885, 902, 909, 917, 920, 917, 917, 898, 884, 869, 851, 828, 805, 763, 726, 684, 665, 635, 614, 598, 590, 562, 544, 549, 550, 561, 577, 599, 617, 645, 667, 688, 726, 750, 777, 790, 832, 852, 878, 877, 878, 875, 870, 851, 842, 825, 812, 773, 732, 697, 648, 609, 561, 509, 465, 430, 385, 331, 288, 245, 181, 0]
-  }]
+  "series": [{
+      "name": "评论者行业分布",
+      "type": "bar",
+      "stack": "总量",
+      "barMaxWidth": 35,
+      "barGap": "10%",
+      "itemStyle": {
+        "normal": {
+          "color": "rgba(255,144,128,1)",
+        }
+      },
+      "data": [
+        8,
+        7,
+        8,
+        7.51,
+        7.1,
+        6.91,
+        7.53,
+        7.47,
+        7.48,
+        7.03,
+        6.23,
+        6.54,
+        7.54,
+        6.5,
+        7.18,
+        6.12,
+        7.87,
+        6.73,
+        6.55,
+        6.23,
+        6.31,
+        6.74,
+        5.95,
+        6.13,
+        6.04,
+        5.56,
+        5.91,
+        4.29,
+        4.72,
+        5.38,
+        4.92,
+        4.61,
+        3.62,
+        5.35,
+        5.28,
+        4.63,
+        4.72,
+
+      ],
+    }
+  ]
 }
 
 /**
  * 文章类别 图表配置
  */
 export var classfication = {
-  backgroundColor:'#fff',
+  backgroundColor: '#fff',
   legend: {
-      orient: 'vertical',
-      right: '20',
-      y: 'center',
-      x: '80%',
-      icon: 'circle',
-      textStyle: {
-          color: '#196FD9'
-      },
-      data: ['政治', '文化', '社会'],
-      formatter: function(name) {
-          var oa = classfication.series[0].data;
-          var num = oa[0].value + oa[1].value + oa[2].value;
-          for (var i = 0; i < classfication.series[0].data.length; i++) {
-              if (name == oa[i].name) {
-                  return name + '     ' + (oa[i].value / num * 100).toFixed(2) + '%';
-              }
-          }
+    orient: 'vertical',
+    right: '20',
+    y: 'center',
+    x: '80%',
+    icon: 'circle',
+    textStyle: {
+      color: '#196FD9'
+    },
+    data: ['政治', '文化', '社会'],
+    formatter: function (name) {
+      var oa = classfication.series[0].data;
+      var num = oa[0].value + oa[1].value + oa[2].value;
+      for (var i = 0; i < classfication.series[0].data.length; i++) {
+        if (name == oa[i].name) {
+          return name + '     ' + (oa[i].value / num * 100).toFixed(2) + '%';
+        }
       }
+    }
   },
   series: [{
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: ['50%', '70%'],
-      roseType: 'radius',
-      startAngle: 100,
-      color: ['#FF4F64', '#2271DD', '#FF9D1B'],
-      label: {
-          normal: {
-              show: false
-          }
+    type: 'pie',
+    center: ['50%', '50%'],
+    radius: ['50%', '70%'],
+    roseType: 'radius',
+    startAngle: 100,
+    color: ['#FF4F64', '#2271DD', '#FF9D1B'],
+    label: {
+      normal: {
+        show: false
+      }
+    },
+    labelLine: {
+      normal: {
+        show: false
       },
-      labelLine: {
-          normal: {
-              show: false
-          },
 
-      },
-      data: [{
-          value: 700,
-          name: '政治',
+    },
+    data: [{
+      value: 700,
+      name: '政治',
 
-      }, {
-          value: 500,
-          name: '文化',
-      }, {
-          value: 1000,
-          name: '社会',
+    }, {
+      value: 500,
+      name: '文化',
+    }, {
+      value: 1000,
+      name: '社会',
 
-      }]
+    }]
   }, {
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: ['45%', '46%'],
-      label: {
-          show: false,
-      },
-      data: [{
-          value: 0,
-          itemStyle: {
-              normal: {
-                  color: '#1C365E'
-              }
-          }
-      }]
+    type: 'pie',
+    center: ['50%', '50%'],
+    radius: ['45%', '46%'],
+    label: {
+      show: false,
+    },
+    data: [{
+      value: 0,
+      itemStyle: {
+        normal: {
+          color: '#1C365E'
+        }
+      }
+    }]
   }, {
-      name: '',
-      type: 'pie',
-      clockWise: true,
-      hoverAnimation: false,
-      radius: [0, '43%'],
-      label: {
-          normal: {
-              position: 'center'
-          }
+    name: '',
+    type: 'pie',
+    clockWise: true,
+    hoverAnimation: false,
+    radius: [0, '43%'],
+    label: {
+      normal: {
+        position: 'center'
+      }
+    },
+    data: [{
+      value: 0,
+      itemStyle: {
+        normal: {
+          color: '#43AFF1'
+        }
       },
-      data: [{
-          value: 0,
-          itemStyle: {
-              normal: {
-                  color: '#43AFF1'
-              }
-          },
-          label: {
-              normal: {
-                  formatter: '文章分类',
-                  textStyle: {
-                      color: '#000',
-                      fontSize: 25,
-                      fontWeight: 'bold'
-                  }
-              }
+      label: {
+        normal: {
+          formatter: '文章分类',
+          textStyle: {
+            color: '#000',
+            fontSize: 25,
+            fontWeight: 'bold'
           }
-      }]
+        }
+      }
+    }]
   }]
 }
 
