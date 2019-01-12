@@ -14,18 +14,21 @@
 <script>
 import LeftMenu from './LeftMenu'
 import * as chartOps from './options/chart'
+require('echarts/map/js/province/xizang.js')
 
 export default {
   name: 'Chart',
   data() {
     return ({
-      listTypes: ['地区生产总值', '工资', '固定资产投资', '财政收支'],
+      listTypes: ['地区生产总值', '城镇单位工资', '固定资产投资', '财政收支', '各市县人口分布', '各市县GDP'],
       typeId: 0,
       options: [
         chartOps.total,
         chartOps.salary,
         chartOps.invest,
-        chartOps.income
+        chartOps.income,
+        chartOps.population,
+        chartOps.gdpDistribution
       ]
     })
   },
@@ -67,7 +70,7 @@ export default {
 }
 
 .show-card-chart {
-  width: 800px;
+  width: 1198px;
   height: 600px;
 }
 </style>

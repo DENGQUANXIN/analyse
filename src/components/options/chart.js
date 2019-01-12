@@ -1,12 +1,15 @@
+import echarts from 'echarts'
+
 /**
  * 地区生产总值 柱状图配置
  */
 export var total = {
   title: {
-    text: '地区生产总值',
-    subtext: '来源: 国家数据'
+    text: '地区生产总值(亿元)',
+    subtext: '来源: 国家数据',
+    left: '10%',
+    top: '3%'
   },
-  color: ['#3398DB'],
   tooltip: {
     trigger: 'axis',
     axisPointer: { // 坐标轴指示器，坐标轴触发有效
@@ -14,14 +17,15 @@ export var total = {
     }
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
+    left: '10%',
+    right: '12%',
+    top: '15%',
+    bottom: 0,
     containLabel: true
   },
   xAxis: [{
     type: 'category',
-    data: ['2007年', '2008年', '2009年', '2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年'],
+    data: ['2007年', '2008年', '2009年', '2010年', '2011年', '2012年', '2013年', '2014年', '2015年', '2016年', '2017年'],
     axisTick: {
       alignWithLabel: true
     }
@@ -30,10 +34,10 @@ export var total = {
     type: 'value'
   }],
   series: [{
-    name: '直接访问',
+    name: '亿元',
     type: 'bar',
     barWidth: '60%',
-    data: [341.43, 394.85, 441.36, 507.46, 605.83, 701.03, 815.67, 920.83, 1026.39, 1151.41]
+    data: [341.43, 394.85, 441.36, 507.46, 605.83, 701.03, 815.67, 920.83, 1026.39, 1151.41, 1310.92]
   }]
 }
 
@@ -43,7 +47,9 @@ export var total = {
 export var salary = {
   title: {
     text: '城镇单位就业人员工资',
-    subtext: '来源:\n国家数据'
+    subtext: '来源: 国家数据',
+    left: '10%',
+    top: '3%'
   },
   tooltip: {
     trigger: 'axis',
@@ -55,7 +61,13 @@ export var salary = {
     }
   },
   legend: {
+    top: '3%',
     data: ['平均工资', '工资总额']
+  },
+  grid: {
+    left: '10%',
+    right: '12%',
+    top: '16%'
   },
   dataZoom: {
     show: false,
@@ -106,6 +118,8 @@ export var salary = {
  */
 export var invest = {
   title: {
+    top: '3%',
+    left: '10%',
     text: '固定资产投资',
     subtext: '来源: 国家数据'
   },
@@ -116,12 +130,14 @@ export var invest = {
     }
   },
   legend: {
+    top: '3%',
     data: ['全社会固定资产投资(亿元)', '房地产投资额(亿元)']
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
+    left: '10%',
+    right: '12%',
+    top: '15%',
+    bottom: 0,
     containLabel: true
   },
   xAxis: {
@@ -163,6 +179,8 @@ export var invest = {
  */
 export var income = {
   title: {
+    top: '3%',
+    left: '9%',
     text: '财政收支',
     subtext: '来源: 国家数据'
   },
@@ -173,12 +191,14 @@ export var income = {
     }
   },
   legend: {
+    top: '3%',
     data: ['一般预算收入(亿元)', '一般预算支出(亿元)']
   },
   grid: {
-    left: '3%',
-    right: '4%',
-    bottom: '3%',
+    left: '10%',
+    right: '12%',
+    top: '15%',
+    bottom: 0,
     containLabel: true
   },
   xAxis: {
@@ -200,4 +220,228 @@ export var income = {
       data: [275.37, 380.66, 470.13, 551.04, 758.11, 905.34, 1014.31, 1185.51, 1381.46, 1587.98]
     }
   ]
+}
+
+/**
+ * 人口分布 图表配置
+ */
+export var gdpDistribution = {
+  title: {
+    text: '2017年西藏各地区 地区生产总值',
+    x: 'center',
+    top: '3%'
+  },
+  tooltip: {
+    trigger: 'item'
+  },
+  dataRange: {
+    min: 0,
+    max: 250,
+    x: '85%',
+    y: 'bottom',
+    text: ['高', '低'],
+    calculable: true
+  },
+  roamController: {
+    show: true,
+    x: 'right',
+    mapTypeControl: {
+      '西藏': true
+    }
+  },
+  series: [{
+    top: '15%',
+    name: '地区生产总值(亿元)',
+    type: 'map',
+    mapType: '西藏',
+    roam: false,
+    itemStyle: {
+      normal: {
+        label: {
+          show: true
+        }
+      },
+      emphasis: {
+        label: {
+          show: true
+        }
+      }
+    },
+    data: [{
+      name: '阿里地区',
+      value: 46.5
+    }, {
+      name: '那曲地区',
+      value: 121
+    }, {
+      name: '日喀则市',
+      value: 218
+    }, {
+      name: '山南市',
+      value: 148.5
+    }, {
+      name: '林芝市',
+      value: 133.31
+    }, {
+      name: '昌都市',
+      value: 180
+    }, {
+      name: '拉萨市',
+      value: 478.3
+    }]
+  }]
+}
+
+var educations = {
+  '阿里地区': [41.1, 30.4, 65.1, 53.3, 83.8, 98.7, 65.1],
+  '那曲地区': [23, 30, 65, 53, 83, 98, 65],
+  '日喀则市': [22.1, 12.4, 43.1, 65.3, 87.8, 98.7, 65.1],
+  '山南市': [43.1, 30.4, 65.1, 53.3, 83.8, 98.7, 65.1],
+  '林芝市': [34.1, 30.4, 65.1, 53.3, 83.8, 98.7, 65.1],
+  '昌都市': [41.1, 30.4, 65.1, 53.3, 83.8, 98.7, 65.1],
+  '拉萨市': [41.1, 30.4, 65.1, 53.3, 83.8, 98.7, 65.1]
+}
+
+function tooltipCharts(name) {
+  var myChart = echarts.init(document.getElementById('tooltipBarId'));
+  var option = {
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b}({d}%)"
+    },
+    dataset: {
+      source: {"name":['研究生', '本科生', '专科生', '高中生', '初中生', '小学生', '未上学'], '数量(万人)': educations[name]}
+    },
+    series: [{
+        name: '受教育情况',
+        type: 'pie',
+        label: {
+            normal: {
+                textStyle: {
+                    color: '#666',
+                    fontSize: 14,
+                }
+            }
+        },
+        labelLine: {
+            normal: {
+                show: true
+            }
+        },
+        itemStyle: {
+            normal: {
+                borderWidth: 4,
+                borderColor: '#ffffff',
+            },
+            emphasis: {
+                borderWidth: 0,
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }],
+    color: [
+        '#00acee',
+        '#52cdd5',
+        '#79d9f1',
+        '#a7e7ff',
+        '#c8efff'
+    ],
+    backgroundColor: '#fff'
+};
+  myChart.setOption(option);
+}
+
+export var population = {
+  title: {
+    text: '第6次人口普查 人口及受教育程度分布',
+    x: 'center',
+    top: '3%'
+  },
+  visualMap: {
+      min: 0,
+      max: 80,
+      right: '5%',
+      top: 'bottom',
+      text: ['高', '低'],
+      calculable: false,
+      orient: 'horizontal',
+      inRange: {
+          color: ['#e0ffff', '#006edd'],
+          symbolSize: [30, 100]
+      }
+  },
+  tooltip: {
+      padding: 0,
+      enterable: true,
+      transitionDuration: 1,
+      textStyle: {
+          color: '#000',
+          decoration: 'none',
+      },
+      formatter: function(params) {
+          var tipHtml = '';
+          tipHtml = '<div style="height:360px;width:400px;border-radius:5px;background:#fff;box-shadow:0 0 10px 5px #aaa">' +
+              '    <div style="height:50px;width:100%;border-radius:5px;background:#F8F9F9;border-bottom:1px solid #F0F0F0">' +
+              '        <span style="line-height:50px;margin-left:18px">' + params.name + '</span>' +
+              '        <span style="float:right;line-height:50px;margin-right:18px;color:#5396E3;cursor:pointer" onclick="mapTooltipClick(this);">点击查看详情</span>' +
+              '    </div>' +
+              '    <div style="height:50px;width:100%;background:#fff">' +
+              '        <div style="padding-left:18px;padding-top:22px">' +
+              '            <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:rgba(92,169,235,1)"></span> ' +
+              '            <span>地区总人口</span>' +
+              '            <span style="float:right;margin-right:18px">' + params.data.value + '万人</span>' +
+              '        </div>' +
+              '    </div>' +
+              '    <div id="tooltipBarId" style="height:300px;width:100%;border-radius:0 0 5px 0;background:#fff"></div>' +
+              '</div>';
+          setTimeout(function() {
+              tooltipCharts(params.name);
+          }, 10);
+          return tipHtml;
+      }
+  },
+  series: [{
+      name: 'iphone4',
+      type: 'map',
+      top: '15%',
+      mapType: '西藏',
+      itemStyle: {
+          normal: {
+              label: {
+                  show: true
+              }
+          },
+          emphasis: {
+              label: {
+                  show: true
+              }
+          }
+      },
+      data: [
+        {
+          name: '拉萨市',
+          value: 55
+        }, {
+          name: '阿里地区',
+          value: 9
+        }, {
+          name: '那曲地区',
+          value: 19
+        }, {
+          name: '日喀则市',
+          value: 70
+        }, {
+          name: '山南市',
+          value: 32
+        }, {
+          name: '林芝市',
+          value: 19
+        }, {
+          name: '昌都市',
+          value: 65
+        }
+      ]
+  }, ]
 }
