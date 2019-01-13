@@ -267,42 +267,11 @@ export var gdpDistribution = {
         }
       }
     },
-    data: [{
-      name: '阿里地区',
-      value: 46.5
-    }, {
-      name: '那曲地区',
-      value: 121
-    }, {
-      name: '日喀则市',
-      value: 218
-    }, {
-      name: '山南市',
-      value: 148.5
-    }, {
-      name: '林芝市',
-      value: 133.31
-    }, {
-      name: '昌都市',
-      value: 180
-    }, {
-      name: '拉萨市',
-      value: 478.3
-    }]
+    data: []
   }]
 }
 
-var educations = {
-  '阿里地区': [0.05,2.73,4.64,5.22,10.89,32.54,43.93],
-  '那曲地区': [0.03,1.16,2.29,2.78,8.38,35.25,50.11],
-  '日喀则市': [0.03,1.68,2.41,3.79,14.87,43.88,33.35],
-  '山南市': [0.05,2.41,3.39,5.54,16.08,50.99,21.55],
-  '林芝市': [0.14,2.52,3.46,4.84,14.26,40.60,34.19],
-  '昌都市': [0.04,0.94,1.75,2.36,10.28,39.92,44.7],
-  '拉萨市': [0.46,5.56,7.20,9.47,21.10,36.62,19.59]
-}
-
-function tooltipCharts(name) {
+function tooltipCharts(education) {
   var myChart = echarts.init(document.getElementById('tooltipBarId'));
   var option = {
     tooltip: {
@@ -310,7 +279,7 @@ function tooltipCharts(name) {
         formatter: "{a} <br/>{b}({d}%)"
     },
     dataset: {
-      source: {"name":['研究生', '本科生', '专科生', '高中生', '初中生', '小学生', '未上学'], '数量(万人)': educations[name]}
+      source: {"name":['研究生', '本科生', '专科生', '高中生', '初中生', '小学生', '未上学'], '数量(万人)': education}
     },
     series: [{
         name: '受教育情况',
@@ -396,8 +365,9 @@ export var population = {
               '    </div>' +
               '    <div id="tooltipBarId" style="height:300px;width:100%;border-radius:0 0 5px 0;background:#fff"></div>' +
               '</div>';
+          
           setTimeout(function() {
-              tooltipCharts(params.name);
+              tooltipCharts(params.data.education);
           }, 10);
           return tipHtml;
       }
@@ -419,29 +389,6 @@ export var population = {
               }
           }
       },
-      data: [
-        {
-          name: '拉萨市',
-          value: 55
-        }, {
-          name: '阿里地区',
-          value: 9
-        }, {
-          name: '那曲地区',
-          value: 19
-        }, {
-          name: '日喀则市',
-          value: 70
-        }, {
-          name: '山南市',
-          value: 32
-        }, {
-          name: '林芝市',
-          value: 19
-        }, {
-          name: '昌都市',
-          value: 65
-        }
-      ]
-  }, ]
+      data: []
+  }]
 }

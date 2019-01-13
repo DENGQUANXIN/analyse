@@ -72,6 +72,16 @@ export default {
             this.options[this.typeId].yAxis.data = income.years
             this.options[this.typeId].series[0].data = income.data
             this.options[this.typeId].series[1].data = outcome.data
+          } else if(this.typeId == 4){
+            var population = response.data.data.content.population
+            var education = response.data.data.content.education
+            for(var i=0,len=population.length; i<len; i++){
+              population[i]['education'] = education[population[i]['name']]
+            }
+            this.options[this.typeId].series[0].data = population
+          } else if(this.typeId == 5){
+            var data = response.data.data.content['2017年']
+            this.options[this.typeId].series[0].data = data
           }
           this.drawLine(this.typeId)
         } else {
