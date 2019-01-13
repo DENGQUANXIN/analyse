@@ -180,13 +180,13 @@ export var authorGender = {
 
     },
     data: [{
-      value: 700,
+      value: 362,
       name: '男',
     }, {
-      value: 500,
+      value: 97,
       name: '女',
     }, {
-      value: 1000,
+      value: 41,
       name: '未填写',
     }]
   }, {

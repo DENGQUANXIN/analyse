@@ -13,6 +13,7 @@
 
 <script>
 import LeftMenu from './LeftMenu'
+import {analyseBackUrls} from './options/urls'
 import * as chartOps from './options/chart'
 require('echarts/map/js/province/xizang.js')
 
@@ -36,12 +37,50 @@ export default {
     'left-menu': LeftMenu
   },
   mounted() {
+    this.getChart()
     this.drawLine(this.typeId)
   },
   updated() {
+    this.getChart()
     this.drawLine(this.typeId)
   },
   methods: {
+    getChart() {
+      this.$http.post(analyseBackUrls.chart, {typeId: this.typeId}).then((response) => {
+        if(response.data.state == 0){
+          if(this.typeId == 0){
+            var years = response.data.data.content.years
+            var data = response.data.data.content.data
+            this.options[this.typeId].xAxis[0].data = years
+            this.options[this.typeId].series[0].data = data
+          } else if(this.typeId == 1){
+            var average = response.data.data.content.average
+            var total = response.data.data.content.total
+            this.options[this.typeId].xAxis[0].data = average.years
+            this.options[this.typeId].xAxis[1].data = total.years
+            this.options[this.typeId].series[0].data = average.data
+            this.options[this.typeId].series[1].data = total.data
+          } else if(this.typeId == 2){
+            var total = response.data.data.content.total
+            var property = response.data.data.content.property
+            this.options[this.typeId].yAxis.data = total.years
+            this.options[this.typeId].series[0].data = total.data
+            this.options[this.typeId].series[1].data = property.data
+          } else if(this.typeId == 3){
+            var income = response.data.data.content.income
+            var outcome = response.data.data.content.outcome
+            this.options[this.typeId].yAxis.data = income.years
+            this.options[this.typeId].series[0].data = income.data
+            this.options[this.typeId].series[1].data = outcome.data
+          }
+          this.drawLine(this.typeId)
+        } else {
+          this.drawLine(this.typeId)
+        }
+      }, (response) => {
+        console.log("获取图表出错");
+      });
+    },
     setTypeID(msg) {
       this.typeId = msg
     },

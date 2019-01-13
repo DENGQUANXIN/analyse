@@ -14,6 +14,7 @@
 
 <script>
 import LeftMenu from './LeftMenu'
+import {analyseBackUrls} from './options/urls'
 import * as wordcloudOps from './options/wordcloud'
 require('echarts-wordcloud')
 
@@ -45,7 +46,7 @@ export default {
   },
   methods: {
     getWordcloud() {
-      this.$http.post('http://127.0.0.1:8000/wordcloud', {typeId: this.typeId}).then((response) => {
+      this.$http.post(analyseBackUrls.wordcloud, {typeId: this.typeId}).then((response) => {
         if(response.data.state == 0){
           this.options[this.typeId].series[0].data = response.data.data.content
           this.drawLine(this.typeId)
