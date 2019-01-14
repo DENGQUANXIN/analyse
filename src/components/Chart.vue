@@ -38,50 +38,55 @@ export default {
   },
   mounted() {
     this.getChart()
-    this.drawLine(this.typeId)
   },
   updated() {
     this.getChart()
-    this.drawLine(this.typeId)
   },
   methods: {
     getChart() {
       this.$http.post(analyseBackUrls.chart, {typeId: this.typeId}).then((response) => {
         if(response.data.state == 0){
-          if(this.typeId == 0){
-            var years = response.data.data.content.years
-            var data = response.data.data.content.data
-            this.options[this.typeId].xAxis[0].data = years
-            this.options[this.typeId].series[0].data = data
-          } else if(this.typeId == 1){
-            var average = response.data.data.content.average
-            var total = response.data.data.content.total
-            this.options[this.typeId].xAxis[0].data = average.years
-            this.options[this.typeId].xAxis[1].data = total.years
-            this.options[this.typeId].series[0].data = average.data
-            this.options[this.typeId].series[1].data = total.data
-          } else if(this.typeId == 2){
-            var total = response.data.data.content.total
-            var property = response.data.data.content.property
-            this.options[this.typeId].yAxis.data = total.years
-            this.options[this.typeId].series[0].data = total.data
-            this.options[this.typeId].series[1].data = property.data
-          } else if(this.typeId == 3){
-            var income = response.data.data.content.income
-            var outcome = response.data.data.content.outcome
-            this.options[this.typeId].yAxis.data = income.years
-            this.options[this.typeId].series[0].data = income.data
-            this.options[this.typeId].series[1].data = outcome.data
-          } else if(this.typeId == 4){
-            var population = response.data.data.content.population
-            var education = response.data.data.content.education
-            for(var i=0,len=population.length; i<len; i++){
-              population[i]['education'] = education[population[i]['name']]
-            }
-            this.options[this.typeId].series[0].data = population
-          } else if(this.typeId == 5){
-            var data = response.data.data.content['2017年']
-            this.options[this.typeId].series[0].data = data
+          switch(this.typeId){
+            case 0:
+              var years = response.data.data.content.years
+              var data = response.data.data.content.data
+              this.options[this.typeId].xAxis[0].data = years
+              this.options[this.typeId].series[0].data = data
+              break
+            case 1:
+              var average = response.data.data.content.average
+              var total = response.data.data.content.total
+              this.options[this.typeId].xAxis[0].data = average.years
+              this.options[this.typeId].xAxis[1].data = total.years
+              this.options[this.typeId].series[0].data = average.data
+              this.options[this.typeId].series[1].data = total.data
+              break
+            case 2:
+              var total = response.data.data.content.total
+              var property = response.data.data.content.property
+              this.options[this.typeId].yAxis.data = total.years
+              this.options[this.typeId].series[0].data = total.data
+              this.options[this.typeId].series[1].data = property.data
+              break
+            case 3:
+              var income = response.data.data.content.income
+              var outcome = response.data.data.content.outcome
+              this.options[this.typeId].yAxis.data = income.years
+              this.options[this.typeId].series[0].data = income.data
+              this.options[this.typeId].series[1].data = outcome.data
+              break
+            case 4:
+              var population = response.data.data.content.population
+              var education = response.data.data.content.education
+              for(var i=0,len=population.length; i<len; i++){
+                population[i]['education'] = education[population[i]['name']]
+              }
+              this.options[this.typeId].series[0].data = population
+              break
+            case 5:
+              var data = response.data.data.content['2017年']
+              this.options[this.typeId].series[0].data = data
+              break
           }
           this.drawLine(this.typeId)
         } else {

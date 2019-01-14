@@ -16,7 +16,10 @@
 <script>
 import LeftMenus from './LeftMenus'
 import * as zhOptions from './options/zhihu'
+import {analyseBackUrls} from './options/urls'
+import { log } from 'util';
 require('echarts/map/js/china.js')
+require('echarts-liquidfill')
 
 export default {
   name: 'Zhihu',
@@ -24,7 +27,7 @@ export default {
     return ({
       listTypes: {
         "文章分析": ['文章类别', '文章词云', '作者性别分布', '点赞评论数'],
-        "评论分析": ['评论者性别分布', '评论者位置分布', '评论者行业分布']
+        "评论分析": ['评论者性别分布', '评论者位置分布', '评论者行业分布', '评论者专业分布', '评论情感分析']
       },
       defaultType: "文章分析",
       typeId: "文章类别",
@@ -36,6 +39,7 @@ export default {
         "评论者性别分布": zhOptions.gender,
         "评论者位置分布": zhOptions.locations,
         "评论者行业分布": zhOptions.industry,
+        "评论者专业分布": zhOptions.major,
         "评论情感分析": zhOptions.sentiment
       }
     })
@@ -44,12 +48,76 @@ export default {
     'left-menus': LeftMenus
   },
   mounted() {
-    this.drawLine(this.typeId)
+    this.getZhihu()
   },
   updated() {
-    this.drawLine(this.typeId)
+    this.getZhihu()
   },
   methods: {
+    getZhihu() {
+      this.$http.post(analyseBackUrls.zhihu, {subtype: this.typeId}).then((response) => {
+        if(response.data.state == 0){
+          var content = response.data.data.content
+          switch(response.data.data.typeId){
+            case 0:
+            case 2:
+              var sum = 0
+              this.options[this.typeId].series[0].data = content.data
+              content.data.forEach(v=>{  
+                  sum += v.value
+              });
+              this.options[this.typeId].series[1].data[0].value = sum
+              break;
+            case 1:
+              this.options[this.typeId].series[0].data = content.data
+              break;
+            case 3:
+              this.options[this.typeId].yAxis.data = content.label
+              this.options[this.typeId].series[0].data = content.comments
+              this.options[this.typeId].series[1].data = content.likes
+              break;
+            case 4:
+              this.options[this.typeId].series[0].data = content.political
+              this.options[this.typeId].series[1].data = content.culture
+              this.options[this.typeId].series[2].data = content.social
+              break;
+            case 5:
+              this.options[this.typeId].series[0].data = content.politics
+              var effectPolitics = content.politics.sort(function (a, b) {
+                return b.value[2] - a.value[2];
+              }).slice(0, 10)
+              this.options[this.typeId].series[1].data = effectPolitics
+
+              this.options[this.typeId].series[2].data = content.culture
+              var effectCulture = content.culture.sort(function (a, b) {
+                return b.value[2] - a.value[2];
+              }).slice(0, 10)
+              this.options[this.typeId].series[3].data = effectCulture
+
+              this.options[this.typeId].series[4].data = content.social
+              var effectSocial = content.social.sort(function (a, b) {
+                return b.value[2] - a.value[2];
+              }).slice(0, 10)
+              this.options[this.typeId].series[5].data = effectSocial
+              break;
+            case 6:
+            case 7:
+              this.options[this.typeId].xAxis[0].data = content.labels
+              this.options[this.typeId].series[0].data = content.politics
+              this.options[this.typeId].series[1].data = content.culture
+              this.options[this.typeId].series[2].data = content.social
+              break;
+            default:
+              break;
+          }
+          this.drawLine(this.typeId)
+        } else {
+          this.drawLine(this.typeId)
+        }
+      }, (response) => {
+        console.log("获取知乎数据出错");
+      });
+    },
     setTypeID(msg) {
       this.typeId = msg
     },

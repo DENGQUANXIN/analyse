@@ -38,11 +38,9 @@ export default {
   },
   mounted() {
     this.getWordcloud()
-    this.drawLine(this.typeId)
   },
   updated() {
     this.getWordcloud()
-    this.drawLine(this.typeId)
   },
   methods: {
     getWordcloud() {
