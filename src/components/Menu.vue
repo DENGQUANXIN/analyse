@@ -17,6 +17,7 @@
             Connection: ['新闻关联分析', 'ios-repeat'],
             Chart: ['西藏图表统计', 'ios-stats'],
             Zhihu: ['知乎西藏话题', 'ios-book'],
+            Keywords: ['LDA主题词', 'ios-book']
           },
           activeName: 'Wordcloud'
         })

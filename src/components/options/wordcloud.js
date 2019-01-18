@@ -5,17 +5,11 @@ export var politics = {
   series: [{
     name: '政治词云统计',
     type: 'wordCloud',
-    autoSize: {
-      enable: true,
-      minSize: 14
-    },
     textStyle: {
       normal: {
         fontFamily: 'sans-serif',
         fontWeight: 'bold',
-        // Color can be a callback function or a color string
         color: function () {
-          // Random color
           return 'rgb(' + [
             Math.round(Math.random() * 160),
             Math.round(Math.random() * 160),
@@ -41,20 +35,14 @@ export var culture = {
   series: [{
     name: '文化词云统计',
     type: 'wordCloud',
-    size: ['100%', '100%'],
-    textRotation: [0, 45, 90, -45],
-    textPadding: 0,
     autoSize: {
-      enable: true,
-      minSize: 14
+      enable: true
     },
     textStyle: {
       normal: {
         fontFamily: 'sans-serif',
         fontWeight: 'bold',
-        // Color can be a callback function or a color string
         color: function () {
-          // Random color
           return 'rgb(' + [
             Math.round(Math.random() * 160),
             Math.round(Math.random() * 160),

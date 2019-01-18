@@ -15,6 +15,6 @@ export default {
   components: {
     'analy-menu': Menu,
     'analy-logo': Logo
-  },
+  }
 }
 </script>

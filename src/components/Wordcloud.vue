@@ -25,7 +25,7 @@ export default {
     return ({
       listTypes: ['政治', '文化', '社会'],
       typeId: 0,
-      picPaths: ['/static/0.jpg', '/static/0.jpg', '/static/2.jpg'],
+      picPaths: ['/static/0.jpg', '/static/1.jpg', '/static/0.jpg'],
       options: [
         wordcloudOps.politics,
         wordcloudOps.culture,
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     getWordcloud() {
-      this.$http.post(analyseBackUrls.wordcloud, {typeId: this.typeId}).then((response) => {
+      this.$http.post(analyseBackUrls.wordcloud, {typeId: 0}).then((response) => {
         if(response.data.state == 0){
           this.options[this.typeId].series[0].data = response.data.data.content
           this.drawLine(this.typeId)
@@ -61,6 +61,7 @@ export default {
     drawLine(typeId) {
       let myChart = this.$echarts.init(document.getElementById('chart' + typeId))
       let options = this.options
+      options[typeId].series[0].maskImage = maskImage
       maskImage.onload = function() {
         options[typeId].series[0].maskImage
         myChart.setOption(options[typeId])

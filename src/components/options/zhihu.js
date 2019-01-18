@@ -853,8 +853,7 @@ export var sentiment = {
       center: ['20%', '50%'],
       color: ['#669999'],
       data: [{
-          name: '积极 评论占比',
-          value: 0.6
+          name: '积极 评论占比'
       }],
       label: {
           formatter: function(param) {
@@ -870,8 +869,7 @@ export var sentiment = {
     center: ['50%', '50%'],
     color: ['#6699FF'],
     data: [{
-        name: '积极 评论占比',
-        value: 0.6
+        name: '积极 评论占比'
     }],
     label: {
         formatter: function(param) {
@@ -887,8 +885,7 @@ export var sentiment = {
     center: ['80%', '50%'],
     color: ['#9999CC'],
     data: [{
-        name: '积极 评论占比',
-        value: 0.6
+        name: '积极 评论占比'
     }],
     label: {
         formatter: function(param) {
@@ -898,7 +895,7 @@ export var sentiment = {
         },
         fontSize: 28,
     }
-  }, 0.5, 0.4],
+  }],
   tooltip: {
     show: true
   }

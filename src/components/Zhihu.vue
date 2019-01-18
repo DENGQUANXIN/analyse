@@ -107,6 +107,13 @@ export default {
               this.options[this.typeId].series[1].data = content.culture
               this.options[this.typeId].series[2].data = content.social
               break;
+            case 8:
+              var temp = content.politics[0].value/(content.politics[1].value+content.politics[0].value)
+              this.options[this.typeId].series[0].data[0].value = temp.toFixed(2)
+              temp = content.culture[0].value/(content.culture[1].value+content.culture[0].value)
+              this.options[this.typeId].series[1].data[0].value = temp.toFixed(2)
+              temp = content.social[0].value/(content.social[1].value+content.social[0].value)
+              this.options[this.typeId].series[2].data[0].value = temp.toFixed(2)
             default:
               break;
           }

@@ -2,10 +2,8 @@
   <div id="analy-body">
     <left-menu @get-type="setTypeID" v-bind:list-types="listTypes"/>
     <div id="analy-content">
-    <div v-for="(item, index) in listTypes">
-      <Card class="show-card" v-if="index == typeId" style="width: 1200px; height: 700px;">
-        <img src="../assets/result1.jpg" style="width: 650px" />
-      </Card>
+    <div>
+        <iframe src="../../static/lda.html" width="1400" height="860" frameborder="0"></iframe>
     </div>
     </div>
   </div>
