@@ -2,8 +2,8 @@
   <div id="analy-body">
     <left-menu @get-type="setTypeID" v-bind:list-types="listTypes"/>
     <div id="analy-content">
-    <div>
-        <iframe src="../../static/lda.html" width="1400" height="860" frameborder="0"></iframe>
+    <div v-for="(item, index) in listTypes">
+        <iframe v-if="index == typeId" :src="'../../static/'+ index +'.html'" :key='index' :name='item' width="1400" height="860" frameborder="0"></iframe>
     </div>
     </div>
   </div>
@@ -26,7 +26,6 @@ export default {
   methods: {
     setTypeID(msg){
       this.typeId = msg
-      console.log(this.typeId);
     }
   }
 }

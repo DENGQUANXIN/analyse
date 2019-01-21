@@ -35,9 +35,6 @@ export var culture = {
   series: [{
     name: '文化词云统计',
     type: 'wordCloud',
-    autoSize: {
-      enable: true
-    },
     textStyle: {
       normal: {
         fontFamily: 'sans-serif',
