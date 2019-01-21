@@ -5,6 +5,8 @@ export var politics = {
   series: [{
     name: '政治词云统计',
     type: 'wordCloud',
+    sizeRange: [12, 40],
+    gridSize: 5,
     textStyle: {
       normal: {
         fontFamily: 'sans-serif',
@@ -18,7 +20,6 @@ export var politics = {
         }
       },
       emphasis: {
-        shadowBlur: 10,
         shadowColor: '#333'
       }
     },
@@ -35,6 +36,8 @@ export var culture = {
   series: [{
     name: '文化词云统计',
     type: 'wordCloud',
+    sizeRange: [12, 40],
+    gridSize: 5,
     textStyle: {
       normal: {
         fontFamily: 'sans-serif',
@@ -65,6 +68,8 @@ export var social = {
   series: [{
     name: '社会词云统计',
     type: 'wordCloud',
+    sizeRange: [12, 40],
+    gridSize: 5,
     size: ['100%', '100%'],
     textRotation: [0, 45, 90, -45],
     textPadding: 0,

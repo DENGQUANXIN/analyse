@@ -25,7 +25,7 @@ export default {
     return ({
       listTypes: ['政治', '文化', '社会'],
       typeId: 0,
-      picPaths: ['/static/0.jpg', '/static/0.jpg', '/static/0.jpg'],
+      picPaths: ['/static/0.jpg', '/static/1.png', '/static/2.jpg'],
       options: [
         wordcloudOps.politics,
         wordcloudOps.culture,
@@ -63,16 +63,16 @@ export default {
       let options = this.options
 
       //不使用maskImage
-      myChart.setOption(options[typeId])
+      // myChart.setOption(options[typeId])
       //使用maskImage
-      // options[typeId].series[0].maskImage = maskImage
-      // maskImage.onload = function() {
-      //   options[typeId].series[0].maskImage
-      //   myChart.setOption(options[typeId])
-      // }
+      options[typeId].series[0].maskImage = maskImage
+      maskImage.onload = function() {
+        options[typeId].series[0].maskImage
+        myChart.setOption(options[typeId])
+      }
 
-      // maskImage.crossOrigin = 'anonymous'
-      // maskImage.src = this.picPaths[typeId]
+      maskImage.crossOrigin = 'anonymous'
+      maskImage.src = this.picPaths[typeId]
     },
   }
 }
